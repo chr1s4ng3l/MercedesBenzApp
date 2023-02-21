@@ -7,6 +7,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -57,4 +59,9 @@ class NetworkModule {
     @Provides
     fun providesServiceApi(retrofit: Retrofit): YelpApi =
         retrofit.create(YelpApi::class.java)
+
+    //Method that provides the IO Dispatcher
+    @Provides
+    fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
 }
