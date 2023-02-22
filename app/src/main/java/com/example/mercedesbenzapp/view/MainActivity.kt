@@ -1,29 +1,43 @@
 package com.example.mercedesbenzapp.view
 
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mercedesbenzapp.R
+import com.example.mercedesbenzapp.databinding.ActivityMainBinding
 import com.example.mercedesbenzapp.viewmodel.MercedesViewModel
+import com.google.common.io.Files.map
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MainActivity"
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val mercedesViewModel: MercedesViewModel by viewModels()
+
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        mercedesViewModel.getAllBusinessByLoc(33.9840285, -84.4269436)
-        mercedesViewModel.business.observe(this, Observer {
-            println("MainActivity.onCreate  $it")
-            Log.d(TAG, "onCreate: $it")
-        })
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.frag_container) as NavHostFragment
+
+
     }
+
+
+
+
 }
