@@ -61,8 +61,8 @@ class MercedesViewHolder(private val binding: RestaurantItemBinding) :
             .with(binding.root)
             .load(item.image)
             .transform(CenterCrop(), RoundedCorners(roundingRadius))
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.color.gray)
+            .error(R.color.gray)
             .into(binding.imageViewRestaurant)
         itemView.setOnClickListener {
             onItemClick(item)

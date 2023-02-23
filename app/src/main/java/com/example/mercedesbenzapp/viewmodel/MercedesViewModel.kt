@@ -23,6 +23,7 @@ class MercedesViewModel @Inject constructor(
 
 
     var name = ""
+    var image = ""
     var phone = ""
     var price = ""
     var distance = 0.0

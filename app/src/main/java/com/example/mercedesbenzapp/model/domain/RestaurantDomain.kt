@@ -22,10 +22,10 @@ fun List<Business>?.mapToDomainRestaurants(): List<RestaurantDomain> =
     this?.map {
         RestaurantDomain(
             id = it.id ?: "ID not available",
-            image = it.imageUrl ?: "not available",
-            name = it.name ?: "not available",
-            phone = it.displayPhone ?: "not available",
-            price = it.price ?: "not available",
+            image = it.imageUrl ?: "Image not available",
+            name = it.name ?: "Name not available",
+            phone = it.displayPhone ?: "Phone not available",
+            price = it.price ?: "$$ not available",
             rating = it.rating ?: 0.0,
             location = it.location ?: Location(address1 = "not available"),
             distance = it.distance ?: 0.0

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FFC107</color>
     <color name="yelp">#FF1A1A</color>
+    <color name="gray">#E3DFDF</color>
 </resources>

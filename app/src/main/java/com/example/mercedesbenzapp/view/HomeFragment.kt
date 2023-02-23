@@ -30,6 +30,7 @@ class HomeFragment : Fragment() {
     private val mercedesAdapter by lazy {
         MercedesAdapter {
             mercedesViewModel.name = it.name
+            mercedesViewModel.image = it.image
             mercedesViewModel.price = it.price
             mercedesViewModel.rating = it.rating
             mercedesViewModel.distance = it.distance
