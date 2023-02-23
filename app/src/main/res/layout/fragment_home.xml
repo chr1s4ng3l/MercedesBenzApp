@@ -1,106 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.HomeFragment"
-    android:background="@drawable/ic_bg">
+    tools:context=".view.HomeFragment">
 
 
-   <com.google.android.material.card.MaterialCardView
-       android:id="@+id/card"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginStart="20dp"
-       android:layout_marginEnd="20dp"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       android:layout_marginTop="10dp"
-       android:background="@color/white"
-       android:elevation="5dp"
-       app:cardCornerRadius="10dp">
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:orientation="vertical">
-
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:gravity="center"
-             android:text="Welcome"
-             android:textColor="#363A43"
-             android:textSize="30sp"
-             android:textStyle="bold" />
-
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="16dp"
-             android:gravity="center"
-             android:text="Please enter your city."
-             android:textColor="#7A8089"
-             android:textSize="16sp" />
-
-         <com.google.android.material.textfield.TextInputLayout
-             android:id="@+id/txt_city"
-             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_city"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="e.j Marietta"
-                android:imeOptions="actionGo"
-                android:inputType="textCapWords"
-                android:textColor="#363A43"
-                android:textColorHint="#7A8089" />
-         </com.google.android.material.textfield.TextInputLayout>
-
-         <Button
-             android:id="@+id/btn_find"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="16dp"
-             android:background="@color/design_default_color_primary"
-             android:text="Find"
-             android:textColor="@android:color/white"
-             android:textSize="18sp" />
-
-      </LinearLayout>
-
-   </com.google.android.material.card.MaterialCardView>
-
-
-    <ImageView
-        android:id="@+id/im"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/im" />
-
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/home"
         android:name="com.example.mercedesbenzapp.view.HomeFragment"
-        android:label="Random Cocktails"
+        android:label="Current Map Area"
         tools:layout="@layout/fragment_home">
 
         <action
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/details"
         android:name="com.example.mercedesbenzapp.view.DetailsFragment"
-        android:label="Random Cocktails"
+        android:label="Restaurant Details"
         tools:layout="@layout/fragment_details">
 
 

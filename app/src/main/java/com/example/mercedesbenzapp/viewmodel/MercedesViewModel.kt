@@ -21,6 +21,13 @@ class MercedesViewModel @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ViewModel() {
 
+
+    var name = ""
+    var phone = ""
+    var price = ""
+    var distance = 0.0
+    var rating = 0.0
+
     private val _business: MutableLiveData<UIState<List<RestaurantDomain>>> =
         MutableLiveData(UIState.LOADING)
     val business: LiveData<UIState<List<RestaurantDomain>>> get() = _business

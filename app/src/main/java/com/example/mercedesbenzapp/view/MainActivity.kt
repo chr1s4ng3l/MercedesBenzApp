@@ -33,11 +33,17 @@ class MainActivity : AppCompatActivity() {
 
         val navHost =
             supportFragmentManager.findFragmentById(R.id.frag_container) as NavHostFragment
+        setupActionBarWithNavController(navHost.navController)
 
 
     }
 
 
+    //Navigate between fragment with the arrow
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.frag_container)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
 
 }
