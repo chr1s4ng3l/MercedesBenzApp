@@ -32,7 +32,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="18dp"
                 android:text="@string/pappasitos_s_cantina"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -47,23 +47,42 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:text="@string/_2917_state_st_carlsbad"
+                android:textSize="12sp"
+                 />
+            <TextView
+                android:id="@+id/tvDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:text="1.1 mi"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                 />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:max="5"
                 android:rating=".5"
                 android:scaleX=".9"
                 android:scaleY=".9"
-                android:theme="@style/RatingBar"
+                android:theme="@style/RatingBarDetail"
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp" />
 
 
+
+
         </LinearLayout>
+
 
 
     </LinearLayout>
