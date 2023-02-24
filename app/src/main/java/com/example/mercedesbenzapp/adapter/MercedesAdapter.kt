@@ -119,6 +119,7 @@ class UserViewHolder(private val binding: UserItemBinding) :
 
         binding.tvUserName.text = item.user.name.toString()
         binding.tvDate.text = item.date
+        binding.tvReview.text = item.review
         binding.ratingBar.rating = item.rating.toFloat()
 
         Glide

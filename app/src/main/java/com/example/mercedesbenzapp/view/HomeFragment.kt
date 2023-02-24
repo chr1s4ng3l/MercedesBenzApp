@@ -99,7 +99,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
         createFragment()
 
-        //mercedesViewModel.getAllBusinessByLoc(mercedesViewModel.lat, mercedesViewModel.lon)
+        //mercedesViewModel.getAllBusinessByLoc(coordinates.latitude, coordinates.longitude)
         getAllBusiness()
         progressBar()
 
@@ -121,10 +121,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
             val listVT: MutableList<ViewType> = mutableListOf()
             when (it) {
                 is UIState.LOADING -> {
-                    mercedesViewModel.isLoading.postValue(true)
                 }
                 is UIState.SUCCESS<List<RestaurantDomain>> -> {
-                    mercedesViewModel.isLoading.postValue(false)
 
                     it.response.forEach{
                         listVT.add(ViewType.RESTAURANT(it))
@@ -133,7 +131,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
                     mercedesAdapter.updateItems(listVT)
                 }
                 is UIState.ERROR -> {
-                    mercedesViewModel.isLoading.postValue(false)
                     it.error.localizedMessage?.let {
                         throw Exception("Error")
                     }
