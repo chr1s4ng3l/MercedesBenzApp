@@ -14,7 +14,6 @@ data class RestaurantDomain(
     val phone: String,
     val price: String,
     val rating: Double,
-    val location: Location,
     val distance: Double
 )
 
@@ -27,7 +26,6 @@ fun List<Business>?.mapToDomainRestaurants(): List<RestaurantDomain> =
             phone = it.displayPhone ?: "Phone not available",
             price = it.price ?: "$$ not available",
             rating = it.rating ?: 0.0,
-            location = it.location ?: Location(address1 = "not available"),
             distance = it.distance ?: 0.0
         )
     } ?: emptyList()

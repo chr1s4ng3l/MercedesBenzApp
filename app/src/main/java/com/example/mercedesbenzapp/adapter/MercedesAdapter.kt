@@ -85,7 +85,7 @@ class MercedesViewHolder(private val binding: RestaurantItemBinding) :
 
         binding.tvName.text = item.name
         binding.tvPhone.text = item.phone
-        binding.tvAddress.text = item.location.address1
+        binding.tvAddress.text = item.rating.toString()
         val miles = item.distance * 0.000621
         binding.tvDistance.text = "${miles.toString().substring(0, 4)} mi"
 

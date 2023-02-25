@@ -36,9 +36,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
-    var mLat = 33.9091
-    var mLon = -84.4792
-
 
     companion object {
         const val REQUEST_LOCATION = 0
@@ -56,7 +53,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         MercedesAdapter {
             mercedesViewModel.name = it.name
             mercedesViewModel.id = it.id
-            mercedesViewModel.price = it.location.address1.toString()
+            mercedesViewModel.price = it.distance.toString()
             mercedesViewModel.image = it.image
             mercedesViewModel.rating = it.rating
             mercedesViewModel.distance = it.distance
@@ -75,6 +72,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,7 +90,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
 
         createFragment()
-
         getAllBusiness()
         progressBar()
 
@@ -122,6 +119,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
                     }
 
                     mercedesAdapter.updateItems(listVT)
+                    mercedesViewModel.saveAllBusinessByLoc(it.response[0])
                 }
                 is UIState.ERROR -> {
                     it.error.localizedMessage?.let {

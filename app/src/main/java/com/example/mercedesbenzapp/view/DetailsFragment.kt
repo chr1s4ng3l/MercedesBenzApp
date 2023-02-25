@@ -57,7 +57,6 @@ class DetailsFragment : Fragment() {
         getAllUsersReviews()
 
 
-
         // Inflate the layout for this fragment
         return binging.root
     }
@@ -65,7 +64,8 @@ class DetailsFragment : Fragment() {
     private fun getDetails() {
         binging.tvName.text = mercedesViewModel.name
         binging.tvPhone.text = mercedesViewModel.phone
-        binging.tvPrice.text = mercedesViewModel.price
+        val miles = mercedesViewModel.price.toFloat() * 0.000621
+        binging.tvPrice.text = "Distance: ${miles.toString().substring(0, 4)} miles"
         binging.ratingBar.rating = mercedesViewModel.rating.toFloat()
 
         Glide
@@ -79,7 +79,7 @@ class DetailsFragment : Fragment() {
 
 
     private fun getAllUsersReviews() {
-        mercedesViewModel.users.observe(viewLifecycleOwner) {state ->
+        mercedesViewModel.users.observe(viewLifecycleOwner) { state ->
             val listVT: MutableList<ViewType> = mutableListOf()
             when (state) {
                 is UIState.LOADING -> {

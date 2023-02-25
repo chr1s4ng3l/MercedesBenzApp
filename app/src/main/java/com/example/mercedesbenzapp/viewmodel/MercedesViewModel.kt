@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mercedesbenzapp.database.LocalRepository
+import com.example.mercedesbenzapp.database.LocalRepositoryImpl
 import com.example.mercedesbenzapp.model.domain.RestaurantDomain
 import com.example.mercedesbenzapp.model.domain.UserDomain
 import com.example.mercedesbenzapp.rest.MercedesRepositoryImpl
@@ -20,6 +22,7 @@ import javax.inject.Inject
 class MercedesViewModel @Inject constructor(
     private val mercedesRepository: MercedesRepositoryImpl,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val localRepository: LocalRepositoryImpl
 ) : ViewModel() {
 
 
@@ -70,6 +73,12 @@ class MercedesViewModel @Inject constructor(
         }
 
     }
+     fun saveAllBusinessByLoc(restaurant: RestaurantDomain) {
+            viewModelScope.launch(ioDispatcher) {
+                localRepository.insertRestaurants(restaurant)
+            }
+        }
+
 
 
 }
