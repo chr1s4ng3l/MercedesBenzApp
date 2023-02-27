@@ -25,6 +25,7 @@
         android:name="com.example.mercedesbenzapp.view.DetailsFragment"
         android:label="Restaurant Details"
         tools:layout="@layout/fragment_details">
+
     </fragment>
 
 

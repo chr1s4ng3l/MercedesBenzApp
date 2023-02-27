@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mercedesbenzapp.R
 import com.example.mercedesbenzapp.databinding.ActivityMainBinding
 import com.example.mercedesbenzapp.viewmodel.MercedesViewModel
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.common.io.Files.map
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,9 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
 
         val navHost =
             supportFragmentManager.findFragmentById(R.id.frag_container) as NavHostFragment

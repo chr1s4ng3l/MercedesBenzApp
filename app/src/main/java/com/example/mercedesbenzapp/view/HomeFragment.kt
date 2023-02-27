@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +37,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
+
+    private lateinit var mapFragment: SupportMapFragment
 
     companion object {
         const val REQUEST_LOCATION = 0
@@ -67,10 +70,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
     }
+
 
 
     override fun onCreateView(
@@ -82,7 +87,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         binding.rvHome.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
             adapter = mercedesAdapter
 
 
@@ -111,8 +115,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
             val listVT: MutableList<ViewType> = mutableListOf()
             when (it) {
                 is UIState.LOADING -> {
+                    mercedesViewModel.isLoading.postValue(true)
                 }
                 is UIState.SUCCESS<List<RestaurantDomain>> -> {
+                    mercedesViewModel.isLoading.postValue(false)
 
                     it.response.forEach {
                         listVT.add(ViewType.RESTAURANT(it))
@@ -120,8 +126,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
                     mercedesAdapter.updateItems(listVT)
                     mercedesViewModel.saveAllBusinessByLoc(it.response[0])
+
                 }
                 is UIState.ERROR -> {
+                    mercedesViewModel.isLoading.postValue(false)
                     it.error.localizedMessage?.let {
                         throw Exception("Error")
                     }
@@ -133,9 +141,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
     //Create googleMaps
     private fun createFragment() {
 
-        val mapFragment =
+         mapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        val ft = FragmentTransaction.TRANSIT_FRAGMENT_OPEN
+
         mapFragment.getMapAsync(this)
+
 
 
     }
@@ -185,6 +196,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
                 val coordinates = LatLng(it.latitude, it.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15f), 2000, null)
                 mercedesViewModel.getAllBusinessByLoc(it.latitude, it.longitude)
+                mercedesViewModel.isLoading.postValue(false)
 
             }
         }
@@ -228,7 +240,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
     override fun onMapClick(p0: LatLng) {
 
         val coordinates = LatLng(p0.latitude, p0.longitude)
-        val marker = MarkerOptions().position(coordinates).title("Restaurants near here")
+        val marker = MarkerOptions().position(coordinates).title("Restaurants near me")
         map.clear()
         map.addMarker(marker)
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 12f), 2000, null)

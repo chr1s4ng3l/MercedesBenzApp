@@ -61,12 +61,10 @@ class MercedesViewModel @Inject constructor(
     }
 
      fun getAllBusinessByLoc(lat: Double? = null, lon: Double? = null) {
-         isLoading.postValue(true)
         if (lat != null && lon != null) {
             viewModelScope.launch(ioDispatcher) {
                 mercedesRepository.getRestaurants(lat, lon).collect {
                     _business.postValue(it)
-                    isLoading.postValue(false)
                     Log.d(ContentValues.TAG, "TEST: $_business")
                 }
             }
