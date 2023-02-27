@@ -19,6 +19,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class RestaurantsRepositoryImplTest {
 
     private lateinit var testObject: MercedesRepository
@@ -42,9 +43,8 @@ internal class RestaurantsRepositoryImplTest {
     }
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `Get all the restaurants by location when response is SUCCESS`() {
+    fun `Get all the restaurants by location when server has a list of items and return a SUCCES state`() {
         //AAA
         //Arrange, Act, Assert.
 
@@ -52,34 +52,35 @@ internal class RestaurantsRepositoryImplTest {
         //Given
         coEvery {
             mockServiceApi.getHotNewRestaurants(
-                latitude = 0.0,
-                longitude = 0.0,
-                term = "restaurants",
-                attributes = "hot_and_new",
-                sort = "best_match",
-                limit = 20
+                0.0, 0.0
             )
             //When
         } returns mockk {
             every { isSuccessful } returns true
             every { body() } returns YelpResponse(
-                businesses = listOf(mockk(), mockk()), total=20
+                listOf(
+                    mockk(relaxed = true),
+                    mockk(relaxed = true),
+                    mockk(relaxed = true)
+                )
             )
         }
 
-        var state: UIState<List<RestaurantDomain>> = UIState.LOADING
+        val state = mutableListOf<UIState<List<RestaurantDomain>>>()
         val job = testScope.launch {
-            testObject.getRestaurants(lat = 0.0, long = 0.0).collect {
-                state = it
+            testObject.getRestaurants(0.0, 0.0).collect {
+                state.add(it)
+
             }
         }
 
         //Then
-        assertEquals((state as UIState.SUCCESS).response, true)
-
+        assertEquals(2, state.size)
+        val success = (state[1] as UIState.SUCCESS).response
+        assertEquals(3, success.size)
 
         job.cancel()
 
     }
 
-    }
+}
