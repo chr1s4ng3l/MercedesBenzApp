@@ -24,6 +24,7 @@ interface YelpApi {
     @GET(PATH_ID + USERS_PATH)
     suspend fun getUsersReview(
         @Path("id") id: String,
+        @Query("limit") limit: Int = 3,
         @Query("sort_by") sorting: String = "yelp_sort"
     ): Response<UserResponse>
 

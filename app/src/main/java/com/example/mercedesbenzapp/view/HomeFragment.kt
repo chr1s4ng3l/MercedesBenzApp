@@ -3,13 +3,12 @@ package com.example.mercedesbenzapp.view
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,8 +28,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-
-private const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMapClickListener {
@@ -81,7 +78,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding.rvHome.apply {
@@ -143,7 +140,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
 
          mapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-        val ft = FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 
         mapFragment.getMapAsync(this)
 
@@ -194,7 +190,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         task.addOnSuccessListener {
             it?.let {
                 val coordinates = LatLng(it.latitude, it.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15f), 2000, null)
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 12f), 2000, null)
                 mercedesViewModel.getAllBusinessByLoc(it.latitude, it.longitude)
                 mercedesViewModel.isLoading.postValue(false)
 
