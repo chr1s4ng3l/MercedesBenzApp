@@ -44,7 +44,6 @@ class MercedesViewModel @Inject constructor(
 
 
     init {
-
         getAllBusinessByLoc()
         getUsersReviews()
     }

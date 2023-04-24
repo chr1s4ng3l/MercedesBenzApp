@@ -26,7 +26,6 @@ class MercedesAdapter(
         if (itemSet != newItems) {
             itemSet.clear()
             itemSet.addAll(newItems)
-
             notifyDataSetChanged()
         }
     }
